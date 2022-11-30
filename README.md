@@ -22,3 +22,9 @@ You can download a ready made binary [here](https://github.com/anoopengineer/win
 
 This is written in Go lang. Head over to http://golang.org/ to download the compiler.
 
+-----
+
+Quick Run:
+```
+go run main.og <host> <username> <encrypted_password>
+```

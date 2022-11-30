@@ -26,5 +26,5 @@ This is written in Go lang. Head over to http://golang.org/ to download the comp
 
 Quick Run:
 ```
-go run main.og <host> <username> <encrypted_password>
+go run main.go <host> <username> <encrypted_password>
 ```

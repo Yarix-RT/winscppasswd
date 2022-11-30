@@ -5,8 +5,7 @@ import (
 	"os"
 	"runtime"
 	"strconv"
-	"github.com/go-ini/ini"
-	"strings"
+_	"strings"
 	"os/user"
 	"log"
 )
@@ -36,15 +35,7 @@ func main() {
 		fmt.Printf("  Default value <filepath>: %s\n", defaultWinSCPIniFilePath());
 		return
 	}
-	if args[0] == "ini" {
-		if (len(args) == 2) {
-			decryptIni(args[1]);
-		} else {
-			decryptIni(defaultWinSCPIniFilePath());
-		}
-	} else {
-		fmt.Println(decrypt(args[0], args[1], args[2]))
-	}
+	fmt.Println(decrypt(args[0], args[1], args[2]))
 }
 
 func defaultWinSCPIniFilePath() string {
@@ -53,24 +44,6 @@ func defaultWinSCPIniFilePath() string {
 		log.Fatal( err )
 	}
 	return usr.HomeDir + "\\AppData\\Roaming\\winSCP.ini"
-}
-
-func decryptIni(filepath string) {
-	cfg, err := ini.InsensitiveLoad(filepath)
-	if (err != nil) {
-		panic(err);
-	}
-
-	for _, c := range cfg.Sections() {
-		if c.HasKey("Password") {
-			fmt.Printf("%s\n", strings.TrimPrefix(c.Name(), "sessions\\"));
-			fmt.Printf("  Hostname: %s\n", c.Key("HostName").Value())
-			fmt.Printf("  Username: %s\n", c.Key("UserName").Value())
-			fmt.Printf("  Password: %s\n", decrypt(c.Key("HostName").Value(), c.Key("UserName").Value(), c.Key("Password").Value()));
-			fmt.Println("========================")
-		}
-	}
-
 }
 
 func decrypt(host, username, password string) string {
